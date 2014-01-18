@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Hot Google Trends</title>
+	<title>Google Trends</title>
 	<link href="http://fonts.googleapis.com/css?family=Roboto:100,300,300italic,400,400italic,700,700italic" rel="stylesheet" type="text/css">
 	<style>
 		body, html {
@@ -17,7 +17,7 @@
 		body {
 			font-size:16pt;
 			font-family: Roboto, Arial, sans-serif;
-			font-weight: 100;
+			font-weight: 300;
 			text-align:center;
 			background-color:#333;
 		}
@@ -33,7 +33,7 @@
 			color: #fff;
 			font-size: 12pt;
 			font-family: Roboto, Arial, sans-serif;
-			font-weight: 100;
+			font-weight: 300;
 		}
 
 		a {
@@ -56,9 +56,15 @@
 			font-weight: 700;
 		}
 
+		td {
+			padding:0px;
+			margin:0px;
+		}
+
 		.header {
 			color: #fff;
 			font-size: 36pt;
+			font-weight: 100;
 			padding:10px 0px 25px 10px;
 		}
 
@@ -73,6 +79,8 @@
 			padding:0px;
 			margin:0px;
 			width:200px;
+			height:200px;
+			border-radius: 3px;
 		}
 
 		.trend-front td, .trend-back td {
@@ -80,8 +88,6 @@
 			margin:0px;
 			color:#fff;
 			text-shadow:0px 0px 10px #222;
-			width:200px;
-			height:200px;
 			text-align: center;
 		}
 
@@ -95,8 +101,7 @@
 		}
 
 		.panel {
-
-			width: 200px;
+			width: 206px;
 			height: 200px;
 			position: relative;
 
@@ -104,8 +109,7 @@
 			-moz-perspective: 600px;
 			perspective: 600px;
 		}
-		/* -- make sure to declare a default for every property that you want animated -- */
-		/* -- general styles, including Y axis rotation -- */
+
 		.panel .front {
 			float: none;
 			position: absolute;
@@ -127,7 +131,6 @@
 			-moz-backface-visibility: hidden;
 			backface-visibility: hidden;
 
-			/* -- transition is the magic sauce for animation -- */
 			-webkit-transition: all .4s ease-in-out;
 			transition: all .4s ease-in-out;
 		}
@@ -147,7 +150,7 @@
 			height: inherit;
 
 			-webkit-transform: rotateY(-180deg);
-			-moz-transform: rotateY(-179deg); /* setting to 180 causes an unnatural-looking half-flip */
+			-moz-transform: rotateY(-179deg);
 			transform: rotateY(-179deg);
 
 			-webkit-transform-style: preserve-3d;
@@ -158,7 +161,6 @@
 			-moz-backface-visibility: hidden;
 			backface-visibility: hidden;
 
-			/* -- transition is the magic sauce for animation -- */
 			-webkit-transition: all .4s ease-in-out;
 			transition: all .4s ease-in-out;
 		}
@@ -170,11 +172,20 @@
 			-moz-transform: rotateX(0deg) rotateY(0deg);
 			transform: rotateX(0deg) rotateY(0deg);
 		}
+
 	</style>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 	<script>
 		$(document).ready(function(){
+
+			var i = 0;
+
+			$('.hover').each(function(){
+				$(this).css('opacity',0).delay(i+=100).fadeTo(500, 1);
+				
+			});
+
 			$('.hover').hover(function(){
 				$(this).addClass('flip');
 			},function(){
@@ -188,11 +199,6 @@
 	<div class="header">
 		Google Trends
 	</div>
-	<script>
-	$.get("http://www.google.com/trends/hottrends/atom/hourly", function (data) {
-		alert(data);
-	}
-	</script>
 <?php
 
 	$crawldata = NULL;
@@ -233,34 +239,41 @@
 		3 => '0, 153, 37'
 	);
 ?>
-
+<table style="border-collapse:collapse;margin:auto;">
+	<tr style="padding:0;margin:0;">
 	<?php for($i = 0; $i < $trends->length; $i++){
 		$rank = $i + 1;
-		$rand_goog = rand(0,3);
-		$rand = mt_rand() / mt_getrandmax() + 0.33;?>
-	<div class="hover panel trend-container">
-		<div class="front">
-			<table class="trend-front" style="background-color:rgba(
-				<?php echo $google_colors[$rand_goog]; ?>,<?php echo $rand; ?>);"><tr><td>
-				<?php echo $trends->item($i)->nodeValue;?>
-			</td></tr></table>
-		</div>
-		<div class="back">
-			<table class="trend-back" style="background-color:#555;"><tr><td>
-				<h1><a href="http://www.google.com/#q=<?php echo $trends->item($i)->nodeValue;?>">
-					<?php echo $trends->item($i)->nodeValue;?></a></h1>
-					<p><a href="http://www.google.com/#q=<?php echo $trends->item($i)->nodeValue;?>">
-						Search Google
-					</p>
-					<p><a href="http://search.yahoo.com/search?p=<?php echo $trends->item($i)->nodeValue;?>">
-						Search Yahoo
-					</p>
-			</td></tr></table>
-		</div>
-	</div>
-<?php } ?> 
-</div>
+		$rand_goog = rand(0,3);?>
+		<td style="padding:0;margin:0;">
+			<div class="hover panel trend-container">
+				<div class="front">
+					<table class="trend-front" style="background-color:rgb(
+						<?php echo $google_colors[$rand_goog]; ?>);"><tr><td>
+						<?php echo $trends->item($i)->nodeValue;?>
+					</td></tr></table>
+				</div>
+				<div class="back">
+					<table class="trend-back" style="background-color:#555;"><tr><td>
+						<h1><a href="http://www.google.com/#q=<?php echo $trends->item($i)->nodeValue;?>">
+							<?php echo $trends->item($i)->nodeValue;?></a></h1>
+							<p><a href="http://www.google.com/#q=<?php echo $trends->item($i)->nodeValue;?>">
+								Search Google
+							</p>
+							<p><a href="http://search.yahoo.com/search?p=<?php echo $trends->item($i)->nodeValue;?>">
+								Search Yahoo
+							</p>
+					</td></tr></table>
+				</div>
+			</div>
+		</td>
+	<?php if($i % 4 == 3) echo "</tr><tr>"; ?>
+	<?php } ?>
+	</tr>
+</table>
 
+	<div class="header">
+		Google Trends
+	</div>
 
 </body>
 </html>
