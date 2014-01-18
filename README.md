@@ -9,7 +9,7 @@ Create a single page application for viewing the current Google Trends grabbed f
 
 ##Source
 
-(http://www.google.com/trends/hottrends/atom/hourly)[http://www.google.com/trends/hottrends/atom/hourly]
+[http://www.google.com/trends/hottrends/atom/hourly](http://www.google.com/trends/hottrends/atom/hourly)
 
 ##Components
 
