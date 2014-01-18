@@ -19,14 +19,14 @@
 			font-family: Roboto, Arial, sans-serif;
 			font-weight: 300;
 			text-align:center;
-			background-color:#333;
+			background-color:#555;
 		}
 
 		h1 {
 			color: #fff;
 			font-size: 16pt;
 			font-family: Roboto, Arial, sans-serif;
-			font-weight: 700;
+			font-weight: 400;
 		}
 
 		p {
@@ -37,7 +37,7 @@
 		}
 
 		a {
-			color:#fff;
+			color:#aaa;
 			text-decoration: none;
 			-webkit-transition: color 0.1s ease-out; /* Saf3.2+, Chrome */
 			-moz-transition: color 0.1s ease-out; /* Firefox 4+ */
@@ -47,7 +47,7 @@
 		}
 
 		a:hover {
-			color: #bbb;
+			color: #fff;
 			text-decoration: none;
 		}
 
@@ -66,6 +66,15 @@
 			font-size: 36pt;
 			font-weight: 100;
 			padding:10px 0px 25px 10px;
+			text-shadow: 0px 0px 10px #000;
+		}
+
+		.footer {
+			color: #fff;
+			font-size: 20pt;
+			font-weight: 100;
+			padding:25px 0px 10px 10px;
+			text-shadow: 0px 0px 10px #000;
 		}
 
 		.trend-container {
@@ -83,21 +92,18 @@
 			border-radius: 3px;
 		}
 
+		.trend-back {
+			background-color:#333;
+		}
+
 		.trend-front td, .trend-back td {
 			padding:0px;
 			margin:0px;
 			color:#fff;
-			text-shadow:0px 0px 10px #222;
+			text-shadow:1px 1px 5px #000;
 			text-align: center;
-		}
-
-		.trend-front td {
 			text-transform: lowercase;
 			vertical-align: middle;
-		}
-
-		.trend-back td {
-			vertical-align: top;
 		}
 
 		.panel {
@@ -253,14 +259,16 @@
 					</td></tr></table>
 				</div>
 				<div class="back">
-					<table class="trend-back" style="background-color:#555;"><tr><td>
-						<h1><a href="http://www.google.com/#q=<?php echo $trends->item($i)->nodeValue;?>">
-							<?php echo $trends->item($i)->nodeValue;?></a></h1>
+					<table class="trend-back"><tr><td>
+							<p>search:</p>
 							<p><a href="http://www.google.com/#q=<?php echo $trends->item($i)->nodeValue;?>">
-								Search Google
+								Google
 							</p>
 							<p><a href="http://search.yahoo.com/search?p=<?php echo $trends->item($i)->nodeValue;?>">
-								Search Yahoo
+								Yahoo
+							</p>
+							<p><a href="http://www.bing.com/search?q=<?php echo $trends->item($i)->nodeValue;?>">
+								Bing
 							</p>
 					</td></tr></table>
 				</div>
@@ -271,8 +279,8 @@
 	</tr>
 </table>
 
-	<div class="header">
-		Google Trends
+	<div class="footer">
+		Alex Johnson - <a href="http://winginit.net">http://winginit.net</a> - <a href="http://github.com/alexmj212/trends">Project on Github</a>
 	</div>
 
 </body>
