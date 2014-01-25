@@ -3,7 +3,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Google Trends</title>
-	<link href="http://fonts.googleapis.com/css?family=Roboto:100,300,300italic,400,400italic,700,700italic" rel="stylesheet" type="text/css">
+	<link 
+		href="http://fonts.googleapis.com/css?family=Roboto:100,300,300italic,400,400italic,700,700italic" 
+		rel="stylesheet" 
+		type="text/css">
 	<style>
 		body, html {
 			height:100%;
@@ -39,11 +42,11 @@
 		a {
 			color:#aaa;
 			text-decoration: none;
-			-webkit-transition: color 0.1s ease-out; /* Saf3.2+, Chrome */
-			-moz-transition: color 0.1s ease-out; /* Firefox 4+ */
-			-ms-transition: color 0.1s ease-out; /* IE10+ */
-			-o-transition: color 0.1s ease-out; /* Opera 10.5+ */
-			transition: color 0.1s ease-out;
+			-webkit-transition: color 0.5s ease-out; /* Saf3.2+, Chrome */
+			-moz-transition: color 0.5s ease-out; /* Firefox 4+ */
+			-ms-transition: color 0.5s ease-out; /* IE10+ */
+			-o-transition: color 0.5s ease-out; /* Opera 10.5+ */
+			transition: color 0.5s ease-out;
 		}
 
 		a:hover {
@@ -107,8 +110,8 @@
 		}
 
 		.panel {
-			width: 206px;
-			height: 200px;
+			width: 203px;
+			height: 197px;
 			position: relative;
 
 			-webkit-perspective: 600px;
@@ -198,21 +201,78 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 	<script>
-		$(document).ready(function(){
+		var i = 0;
 
-			var i = 0;
+		//An array with pretty colors (google sanctioned colors)
+		var frontcolors = Array('#33B5E5','#AA66CC','#99CC00','#FFBB33','#FF4444');
 
-			$('.hover').each(function(){
-				$(this).css('opacity',0).delay(i+=100).fadeTo(500, 1);
-				
-			});
+		$.get( "google-trends.txt", function( file ) {
 
-			$('.hover').hover(function(){
-				$(this).addClass('flip');
-			},function(){
-				$(this).removeClass('flip');
-			});
+			//grab all the trends from the file
+			var trends = $(file).find('a');
+
+			//Start function to generate page
+			createtrends(trends);
+
 		});
+
+		//loop through all the trends to produce them on the page
+		function createtrends(trends){
+
+			// save a copy of the cell we need
+			var cloned = $('.trend-box:last');
+
+			//initialize counter
+			var counter = 1;
+
+			$(trends).each(function(index) {
+
+				//Pick a new color
+				newcolor = frontcolors[Math.floor(Math.random()*frontcolors.length)];
+
+				trendname = $(this).text();
+
+				//We'll just modify the trend structure already present
+				if(counter == 1){
+					trend = cloned;
+				} else {
+					trend = cloned.clone();
+				}
+
+				//modify the table cell with the new trend
+				$(trend).find('.trend').text ( trendname );
+				$(trend).find('.trend').css('background-color',newcolor);
+				$(trend).find('.google').attr('href','http://www.google.com/#q='+trendname);
+				$(trend).find('.yahoo').attr('href','http://search.yahoo.com/search?p='+trendname);
+				$(trend).find('.bing').attr('href','http://www.bing.com/search?q='+trendname);
+
+				if(counter != 1) {
+					//append it the last element or the row
+					$('.trend-row:last').append(trend);
+				}
+
+				//start a new row after 4 trends
+				if(!(counter % 4)){
+					$('.body').append('</tr><tr class="trend-row">');
+				}
+				
+				counter++; //increase the counter
+
+				//fade effect
+				$('.trend-box:last').css('opacity',0).delay(i+=100).fadeTo(500, 1)
+			});
+		}
+
+		//Hover functions
+		$(document).on("mouseover", ".panel", function(e) {
+			$(this).addClass('flip');
+		});
+		$(document).on("mouseleave", ".panel", function(e) {
+			$(this).removeClass('flip');
+		});
+
+
+
 	</script>
 </head>
 <body>
@@ -220,83 +280,41 @@
 	<div class="header">
 		Google Trends
 	</div>
-<?php
 
-	$crawldata = NULL;
-
-	$debug = false;
-
-	$url = "http://www.google.com/trends/hottrends/atom/hourly";
-
-
-	if($debug) echo "Begin Crawl for $url<br>";
-
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-
-	if($debug) echo "Executing curl...<br>";
-
-	$crawldata = curl_exec($ch);
-	//echo curl_error($ch);
-	curl_close($ch);
-
-	if($debug) echo "Finished curl...<br>";
-
-	if(!$crawldata){
-		if($debug) echo "No crawl data returned!<br>";
-	}
-
-	$doc = new DOMDocument();
-	$doc->loadHTML($crawldata);
-	$xpath = new DOMXpath($doc);
-
-	$trends = $xpath->query("//a");
-
-	$google_colors = array(
-		0 => '51, 119, 232',
-		1 => '213, 15, 37',
-		2 => '238, 178, 17',
-		3 => '0, 153, 37'
-	);
-?>
 <table style="border-collapse:collapse;margin:auto;">
-	<tr style="padding:0;margin:0;">
-	<?php for($i = 0; $i < $trends->length; $i++){
-		$rank = $i + 1;
-		$rand_goog = rand(0,3);?>
-		<td style="padding:0;margin:0;">
-			<div class="hover panel trend-container">
-				<div class="front">
-					<table class="trend-front" style="background-color:rgb(
-						<?php echo $google_colors[$rand_goog]; ?>);"><tr><td>
-						<?php echo $trends->item($i)->nodeValue;?>
-					</td></tr></table>
+	<tbody class="body">
+		<tr class="trend-row" style="padding:0;margin:0;">
+			<td class="trend-box" style="padding:0;margin:0;">
+				<div class="hover panel trend-container">
+					<div class="front">
+						<table class="trend-front"><tr><td class="trend">
+							
+						</td></tr></table>
+					</div>
+					<div class="back">
+						<table class="trend-back"><tr><td class="links">
+								<p>search:</p>
+								<p><a class="google" target="_blank" href="">
+									Google
+								</p>
+								<p><a class="yahoo" target="_blank" href="">
+									Yahoo
+								</p>
+								<p><a class="bing" target="_blank" href="">
+									Bing
+								</p>
+						</td></tr></table>
+					</div>
 				</div>
-				<div class="back">
-					<table class="trend-back"><tr><td>
-							<p>search:</p>
-							<p><a href="http://www.google.com/#q=<?php echo $trends->item($i)->nodeValue;?>">
-								Google
-							</p>
-							<p><a href="http://search.yahoo.com/search?p=<?php echo $trends->item($i)->nodeValue;?>">
-								Yahoo
-							</p>
-							<p><a href="http://www.bing.com/search?q=<?php echo $trends->item($i)->nodeValue;?>">
-								Bing
-							</p>
-					</td></tr></table>
-				</div>
-			</div>
-		</td>
-	<?php if($i % 4 == 3) echo "</tr><tr>"; ?>
-	<?php } ?>
-	</tr>
+			</td>
+		</tr>
+	<tbody>
 </table>
 
 	<div class="footer">
-		Alex Johnson - <a href="http://winginit.net">http://winginit.net</a> - <a href="http://github.com/alexmj212/trends">Project on Github</a>
+		Alex Johnson - 
+		<a href="http://winginit.net">http://winginit.net</a> - 
+		<a href="http://github.com/alexmj212/trends">Project on Github</a>
 	</div>
-
 </body>
 </html>
