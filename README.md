@@ -15,11 +15,10 @@ Create a single page application for viewing the current Google Trends grabbed f
 
 This page primarily uses the following 3 languages.
 
-* PHP
 * jQuery
 * CSS
 
 ##Goals
 
-* Remove the need for PHP, replace with jQuery
+* Remove the need for PHP, replace with jQuery ![checkmark][]
 * Add more pretty jQuery stuff
