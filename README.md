@@ -20,5 +20,6 @@ This page primarily uses the following 3 languages.
 
 ##Goals
 
-* Remove the need for PHP, replace with jQuery ![checkmark][]
+✓ Remove the need for PHP, replace with jQuery
 * Add more pretty jQuery stuff
+* show some trend articles
