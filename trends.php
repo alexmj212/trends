@@ -72,6 +72,11 @@
 			text-shadow: 0px 0px 10px #000;
 		}
 
+		.content {
+			border-collapse:collapse;
+			margin:auto;
+		}
+
 		.footer {
 			color: #fff;
 			font-size: 20pt;
@@ -281,29 +286,36 @@
 		Google Trends
 	</div>
 
-<table style="border-collapse:collapse;margin:auto;">
+<table class="content">
 	<tbody class="body">
-		<tr class="trend-row" style="padding:0;margin:0;">
-			<td class="trend-box" style="padding:0;margin:0;">
+		<tr class="trend-row">
+			<td class="trend-box">
 				<div class="hover panel trend-container">
 					<div class="front">
-						<table class="trend-front"><tr><td class="trend">
-							
-						</td></tr></table>
+						<table class="trend-front">
+							<tr>
+								<td class="trend">
+								</td>
+							</tr>
+						</table>
 					</div>
 					<div class="back">
-						<table class="trend-back"><tr><td class="links">
-								<p>search:</p>
-								<p><a class="google" target="_blank" href="">
-									Google
-								</p>
-								<p><a class="yahoo" target="_blank" href="">
-									Yahoo
-								</p>
-								<p><a class="bing" target="_blank" href="">
-									Bing
-								</p>
-						</td></tr></table>
+						<table class="trend-back">
+							<tr>
+								<td class="links">
+									<p>search:</p>
+									<p><a class="google" target="_blank" href="">
+										Google
+									</a></p>
+									<p><a class="yahoo" target="_blank" href="">
+										Yahoo
+									</a></p>
+									<p><a class="bing" target="_blank" href="">
+										Bing
+									</a></p>
+								</td>
+							</tr>
+						</table>
 					</div>
 				</div>
 			</td>
