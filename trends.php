@@ -295,6 +295,7 @@
 						<table class="trend-front">
 							<tr>
 								<td class="trend">
+									&nbsp;
 								</td>
 							</tr>
 						</table>
