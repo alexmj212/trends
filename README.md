@@ -23,3 +23,4 @@ This page primarily uses the following 3 languages.
 ✓ Remove the need for PHP, replace with jQuery
 * Add more pretty jQuery stuff
 * show some trend articles
+* move to div structure
