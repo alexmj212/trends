@@ -2,7 +2,7 @@
 
 	$crawldata = NULL;
 
-	$debug = true;
+	$debug = false;;
 
 	$url = "http://www.google.com/trends/hottrends/atom/hourly";
 
@@ -14,6 +14,10 @@
 	fwrite($file,$crawldata);
 
 	fclose($file);
+	
+	if(!$debug) {
+		header('Location: http://winginit.net/trends');
+	}
 
 	function get_page($url = NULL){
 
