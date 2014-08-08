@@ -64,7 +64,7 @@ function createtrends(trends){
 		counter++; //increase the counter
 
 		//fade effect
-		$('.trend-box:last').css('opacity',0).delay(i+=100).fadeTo(500, 1)
+		$('.trend-box:last').css('opacity',0).delay(i+=100).fadeTo(500, 1);
 	});
 }
 
