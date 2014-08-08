@@ -36,7 +36,7 @@ module.exports = function(grunt) {
 				[{
 					expand : true, // Enable dynamic expansion.
 					cwd : "js/", // Src matches are relative to this path.
-					src : ["*.js"], // Actual pattern(s) to match.
+					src : ["*.js",'!*.min.js'], // Actual pattern(s) to match.
 					dest : "js/", // Destination path prefix.
 					ext : ".min.js" // Dest filepaths will have this extension.
 				}]
