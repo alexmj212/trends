@@ -17,10 +17,13 @@ This page primarily uses the following 3 languages.
 
 * jQuery
 * CSS
+* nodejs (npm)
+* grunt
 
 ##Goals
 
-✓ Remove the need for PHP, replace with jQuery
-* Add more pretty jQuery stuff
+✓ Remove the need for PHP, replace with jQuery (the updater that grabs trends is still php however)
+✓ Configure node and grunt files for easier development
+✓ Add more pretty jQuery stuff
 * show some trend articles
 * move to div structure
