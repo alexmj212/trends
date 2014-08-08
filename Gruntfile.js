@@ -16,7 +16,7 @@ module.exports = function(grunt) {
 			}
 		},
 		jshint : {
-			all:['js/*.js']
+			all:['js/trends.js']
 		},
 		less : {
 			development : {
@@ -74,9 +74,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('compile-less-dev',['less']); // Will create a 1 to 1 css file in web/css from every less file in web/less. (test.less to test.css)
 	grunt.registerTask('run-tests',['qunit:all']);
 	grunt.registerTask('build',[// validates js, minifies js, runs tests, compiles less. In that order.
-		'jshint:all',
 		'uglify',
-		'qunit:all',
 		'less'
 	]);
 };
