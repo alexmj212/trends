@@ -1,3 +1,44 @@
+# Windows
+# =========================
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# OSX
+# =========================
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must ends with two \r.
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+
+# All Environments
+# =========================
+# Ignore installed node modules
+node_modules/*
+npm-debug.log
+
+# Ignore css directory(This is compiled in the environment via the unignored less)
+css/*
+# Ignore minified js
+js/*.min.js
+
+# Project Specific
+# =========================
 google-trends.txt
-trends.css
-trends.min.js
