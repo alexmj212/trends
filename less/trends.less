@@ -1,3 +1,4 @@
+
 // HTML Styles
 
 body, html {
@@ -53,9 +54,6 @@ a {
 }
 
 .content {
-    margin: auto;
-    max-width: 880px;
-
     // Flex Code for trend boxes
     display: -webkit-box;
     display: -moz-box;
@@ -64,6 +62,9 @@ a {
     display: flex;
     -webkit-flex-flow: row wrap;
     justify-content: space-around;
+    margin: auto;
+    max-width: 880px;
+    width: 880px;
 
 }
 
@@ -78,16 +79,24 @@ a {
     text-shadow: 1px 1px 3px #000;
     text-transform: lowercase;
     position: relative;
-    //float:left;
     -webkit-perspective: 600px;
-       -moz-perspective: 600px;
-            perspective: 600px;
+    -moz-perspective: 600px;
+    perspective: 600px;
     .front, .back {
-
         // Flex code for vertical alignment
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
         display: flex;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        -ms-justify-content: center;
         justify-content: center;
-        align-content: center;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
         flex-direction: column;
 
         font-size: 20px;
@@ -102,10 +111,11 @@ a {
         //line-height: 100px;
         .flip-effect(rotateY(0deg), preserve-3d, hidden, all .4s ease-in-out);
         .marked {
+            font-size: 40px;
             position: absolute;
-            top: -6px;
-            left: 5px;
-            text-shadow: none;
+            top: -12px;
+            left: 7px;
+            text-shadow: 1px 1px 1px #777;
         }
     }
     .back {
