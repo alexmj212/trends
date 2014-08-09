@@ -61,9 +61,25 @@ a {
     display: -webkit-flex;
     display: flex;
     -webkit-flex-flow: row wrap;
+    -moz-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-justify-content: space-around;
+    -moz-justify-content: space-around;
+    -ms-justify-content: space-around;
     justify-content: space-around;
     margin: auto;
     max-width: 880px;
+    text-align: center;
+    @media(min-width:960px){
+        max-width: 880px;
+    }
+    @media(max-width:960px){
+        width:680px;
+    }
+    @media(max-width:775px) {
+        width:100%;
+    }
 }
 
 // Trend Styles
@@ -80,6 +96,10 @@ a {
     -webkit-perspective: 600px;
     -moz-perspective: 600px;
     perspective: 600px;
+    @media(max-width:768px) {
+        width:45%;
+        height:150px;
+    }
     .front, .back {
         // Flex code for vertical alignment
         display: -webkit-box;
@@ -97,13 +117,15 @@ a {
         align-items: center;
         flex-direction: column;
 
-        font-size: 20px;
+        width:100%;
+        font-size: 30px;
         position: absolute;
         top:0;
-        width: inherit;
+        //width: inherit;
         height: inherit;
         border-radius: 3px;
         box-shadow: 1px 1px 5px #bbb;
+        padding:5px;
     }
     .front {
         //line-height: 100px;
