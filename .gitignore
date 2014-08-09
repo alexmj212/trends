@@ -33,6 +33,7 @@ Icon
 # Ignore installed node modules
 node_modules/*
 npm-debug.log
+bower_components/*
 
 # Ignore css directory(This is compiled in the environment via the unignored less)
 css/*
@@ -42,3 +43,4 @@ js/*.min.js
 # Project Specific
 # =========================
 google-trends.txt
+trends.min.js.map

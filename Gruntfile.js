@@ -39,7 +39,10 @@ module.exports = function(grunt) {
 					src : ["*.js",'!*.min.js'], // Actual pattern(s) to match.
 					dest : "js/", // Destination path prefix.
 					ext : ".min.js" // Dest filepaths will have this extension.
-				}]
+				}],
+				options : {
+					sourceMap: "*.map"
+				}
 			}
 		},
 		watch : {
@@ -56,6 +59,12 @@ module.exports = function(grunt) {
 				options : {
 					livereload : true
 				}
+			},
+			html : {
+				files : ['index.html'],
+				options : {
+					livereload : true
+				}
 			}
 		}
 	});
@@ -69,12 +78,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-shell');
 
 	// Set up tasks with registerTask(<task-name>,<list-of-tasks-from-initConfig>)
-	grunt.registerTask('server', ['connect','watch']);
-	grunt.registerTask('validate-js',['jshint:all']);
-	grunt.registerTask('compile-less-dev',['less']); // Will create a 1 to 1 css file in web/css from every less file in web/less. (test.less to test.css)
-	grunt.registerTask('run-tests',['qunit:all']);
-	grunt.registerTask('build',[// validates js, minifies js, runs tests, compiles less. In that order.
-		'uglify',
-		'less'
-	]);
+	grunt.registerTask('start', ['connect','watch']);
+	grunt.registerTask('validate-js', ['jshint:all']);
+	grunt.registerTask('compile-less-dev', ['less']);
+	grunt.registerTask('run-tests', ['qunit:all']);
+	grunt.registerTask('build', ['uglify','less']);
 };

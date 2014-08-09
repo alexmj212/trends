@@ -14,7 +14,7 @@ var frontcolors = Array('#33B5E5','#AA66CC','#99CC00','#FFBB33','#FF4444');
 $.get( "google-trends.txt", function( file ) {
 
 	//grab all the trends from the file
-	var trends = $(file).find('a');
+	var trends = $(file).find('li');
 
 	//Start function to generate page
 	createtrends(trends);
@@ -25,7 +25,7 @@ $.get( "google-trends.txt", function( file ) {
 function createtrends(trends){
 
 	// save a copy of the cell we need
-	var cloned = $('.trend-box:last');
+	var cloned = $('div.trend:last');
 
 	//initialize counter
 	var counter = 1;
@@ -44,34 +44,34 @@ function createtrends(trends){
 			trend = cloned.clone();
 		}
 
+		$(trend).find('.marked').html('');
+		if($(this).find('span').hasClass('Spicy')){
+			$(trend).find('.marked').html('<i class="fa fa-bookmark"></i>');
+		}
+
 		//modify the table cell with the new trend
-		$(trend).find('.trend').text ( trendname );
-		$(trend).find('.trend').css('background-color',newcolor);
-		$(trend).find('.google').attr('href','http://www.google.com/#q='+trendname);
-		$(trend).find('.yahoo').attr('href','http://search.yahoo.com/search?p='+trendname);
-		$(trend).find('.bing').attr('href','http://www.bing.com/search?q='+trendname);
+		$(trend).find('div.front .name').html(trendname);
+		$(trend).find('div.front').css('background-color',newcolor);
+		$(trend).find('a.google').attr('href','http://www.google.com/#q='+trendname);
+		$(trend).find('a.yahoo').attr('href','http://search.yahoo.com/search?p='+trendname);
+		$(trend).find('a.bing').attr('href','http://www.bing.com/search?q='+trendname);
 
 		if(counter != 1) {
 			//append it the last element or the row
-			$('.trend-row:last').append(trend);
-		}
-
-		//start a new row after 4 trends
-		if(!(counter % 4)){
-			$('.body').append('</tr><tr class="trend-row">');
+			$('div.content:last').append(trend);
 		}
 		
 		counter++; //increase the counter
 
 		//fade effect
-		$('.trend-box:last').css('opacity',0).delay(i+=100).fadeTo(500, 1);
+		$('.trend:last').css('opacity',0).delay(i+=100).fadeTo(500, 1);
 	});
 }
 
 //Hover functions
-$(document).on("mouseover", ".panel", function(e) {
+$(document).on("mouseover", ".trend", function(e) {
 	$(this).addClass('flip');
 });
-$(document).on("mouseleave", ".panel", function(e) {
+$(document).on("mouseleave", ".trend", function(e) {
 	$(this).removeClass('flip');
 });

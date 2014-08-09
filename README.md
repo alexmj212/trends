@@ -28,5 +28,7 @@ This page primarily uses the following 3 languages.
 
 ✓ Add more pretty jQuery stuff
 
+✓ move to div structure
+
 * show some trend articles
-* move to div structure
+* add more configuration to ease development
