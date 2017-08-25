@@ -3,15 +3,15 @@ trends
 
 Single Page Google Trends Viewer
 
-##Purpose
+## Purpose
 
 Create a single page application for viewing the current Google Trends grabbed from the Google Trends feed
 
-##Source
+## Source
 
 [https://trends.google.com/trends/hottrends/atom/hourly](https://trends.google.com/trends/hottrends/atom/hourly)
 
-##Components
+## Components
 
 This page primarily uses the following 3 languages.
 
