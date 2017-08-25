@@ -18,6 +18,14 @@ module.exports = function(grunt) {
 		jshint : {
 			all:['js/trends.js']
 		},
+		copy: {
+			main: {
+			  	files: [
+					{ expand: true, src: 'index.html', dest: 'dist/' },
+					{ expand: true, src: 'node_modules/@material/card/dist/mdc.card.min.css', dest: 'dist/css', flatten: true }
+				]
+			},
+		},
 		less : {
 			development : {
 				files : 
@@ -25,7 +33,7 @@ module.exports = function(grunt) {
 					expand : true, // Enable dynamic expansion.
 					cwd : "less/", // Src matches are relative to this path.
 					src : ["*.less"], // Actual pattern(s) to match.
-					dest : "css/", // Destination path prefix.
+					dest : "dist/css/", // Destination path prefix.
 					ext : ".css" // Dest filepaths will have this extension.
 				}]
 			}
@@ -37,7 +45,7 @@ module.exports = function(grunt) {
 					expand : true, // Enable dynamic expansion.
 					cwd : "js/", // Src matches are relative to this path.
 					src : ["*.js",'!*.min.js'], // Actual pattern(s) to match.
-					dest : "js/", // Destination path prefix.
+					dest : "dist/js/", // Destination path prefix.
 					ext : ".min.js" // Dest filepaths will have this extension.
 				}],
 				options : {
@@ -62,6 +70,7 @@ module.exports = function(grunt) {
 			},
 			html : {
 				files : ['index.html'],
+				tasks : ['copy'],
 				options : {
 					livereload : true
 				}
@@ -74,13 +83,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-git');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-shell');
 
-	// Set up tasks with registerTask(<task-name>,<list-of-tasks-from-initConfig>)
-	grunt.registerTask('start', ['connect','watch']);
+	grunt.registerTask('start', ['build','connect','watch']);
 	grunt.registerTask('validate-js', ['jshint:all']);
 	grunt.registerTask('compile-less-dev', ['less']);
-	grunt.registerTask('run-tests', ['qunit:all']);
-	grunt.registerTask('build', ['uglify','less']);
+	grunt.registerTask('build', ['uglify','less', 'copy']);
 };

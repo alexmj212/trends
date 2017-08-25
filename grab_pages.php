@@ -4,7 +4,7 @@
 
 	$debug = false;;
 
-	$url = "http://www.google.com/trends/hottrends/atom/hourly";
+	$url = "https://trends.google.com/trends/hottrends/atom/hourly";
 
 	unlink("google-trends.txt");
 	$file = fopen("google-trends.txt", "w");

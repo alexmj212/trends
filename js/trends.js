@@ -50,11 +50,9 @@ function createtrends(trends){
 		}
 
 		//modify the table cell with the new trend
-		$(trend).find('div.front .name').html(trendname);
-		$(trend).find('div.front').css('background-color',newcolor);
-		$(trend).find('a.google').attr('href','http://www.google.com/#q='+trendname);
-		$(trend).find('a.yahoo').attr('href','http://search.yahoo.com/search?p='+trendname);
-		$(trend).find('a.bing').attr('href','http://www.bing.com/search?q='+trendname);
+		$(trend).find('.name').html(trendname);
+		$(trend).find('.marked').css('color', newcolor);
+		$(trend).css('border-top-color', newcolor);
 
 		if(counter != 1) {
 			//append it the last element or the row
@@ -70,8 +68,8 @@ function createtrends(trends){
 
 //Hover functions
 $(document).on("mouseover", ".trend", function(e) {
-	$(this).addClass('flip');
+	$(this).addClass('flip-tab-pulse');
 });
 $(document).on("mouseleave", ".trend", function(e) {
-	$(this).removeClass('flip');
+	$(this).removeClass('flip-tab-pulse');
 });
